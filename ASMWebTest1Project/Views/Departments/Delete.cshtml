@@ -1,0 +1,82 @@
+﻿@model ASMWebTest1Project.Models.Departments
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+<section class="home-section">
+    <nav>
+        <div class="sidebar-button">
+
+            <span class="dashboard">6Bros</span>
+        </div>
+        <div class="search-box" style="display: flex">
+            @using (Html.BeginForm("IndexGuest", "Ideas", FormMethod.Get))
+            {
+                @Html.TextBox("Search_Data", ViewBag.FilterValue as string, new { @placeholder = "Search" })
+                <input class="search" type="submit" value="    " /><i class="fa fa-search" style="font-size: 28px; position: absolute;
+        left: 275px;
+        top: 10px;
+"></i>      }
+        </div>
+        <div class="profile-details">
+
+            <span class="admin_name">
+                Welcome, @Html.DisplayFor(modelItem => User.Identity.Name)
+            </span>
+
+        </div>
+    </nav>
+
+    <div class="home-content">
+
+
+        <div class="sales-boxes">
+            <div class="recent-sales box">
+                <div class="sales-details" style="display:block">
+
+                    @Html.AntiForgeryToken()
+                    <div class="container" id="ctnn">
+                        <h3 class="text-center">Departments</h3>
+                        <hr />
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayNameFor(model => model.departmenName)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.departmenName)
+                            </dd>
+
+                        </dl>
+
+
+                    </div>
+
+
+
+                    <br />
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-actions no-color">
+                            <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure to delete?')"/> |
+                            @Html.ActionLink("Back to List", "Index")
+                        </div>
+                    }
+                    </div>
+            </div>
+
+        </div>
+
+
+    </div>
+    @* ///////////////////////*@
+
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</section>
+
+

@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "_MainMenu";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+
+
+<section class="home-section">
+    <nav>
+        <div class="sidebar-button">
+
+
+        </div>
+        <div class="search-box" style="display: flex">
+            @using (Html.BeginForm("Index", "Information", FormMethod.Get))
+            {
+                @Html.TextBox("Search_Data", ViewBag.FilterValue as string, new { @placeholder = "Search" })
+
+                <input class="search" type="submit" value="     " /><i class="fa fa-search" style="font-size: 28px; position: absolute;left: 275px;top: 10px;"></i>
+            }
+        </div>
+        <div class="profile-details">
+
+            <span class="admin_name">
+                Welcome, @Html.DisplayFor(modelItem => User.Identity.Name)
+            </span>
+
+        </div>
+    </nav>
+
+    <div class="home-content">
+
+
+        <div class="sales-boxes" style="margin-left:-100px">
+            <div class="recent-sales box" >
+                <div class="container" id="ctn_a">
+
+                    <h3  > The ideas is close, please click to back list ideas !</h3>
+
+                    <a href="~/Ideas/TestIndex">
+                        <i class="bx bx-left-arrow-circle" style="width:100%;font-size:40px;"></i>
+                    </a>
+                </div>
+                
+               
+               
+                
+            </div>
+
+        </div>
+    </div>
+</section>

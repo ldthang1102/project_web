@@ -1,0 +1,90 @@
+﻿@using ASMWebTest1Project.Models
+@model List<FileModel>
+@{
+    ViewBag.Title = "DownloadAll";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<section class="home-section">
+    <nav>
+        <div class="sidebar-button">
+
+            <span class="dashboard">6Bros</span>
+        </div>
+        <div class="search-box" style="display: flex">
+            @using (Html.BeginForm("Index", "Ideas", FormMethod.Get))
+            {
+                @Html.TextBox("Search_Data", ViewBag.FilterValue as string, new { @placeholder = "Search" })
+                <input class="search" type="submit" value="     " /><i class="fa fa-search" style="font-size: 28px; position: absolute;left: 270px;top: 10px;"></i>
+            }
+        </div>
+        <div class="profile-details">
+
+            <span class="admin_name">
+                Welcome, @Html.DisplayFor(modelItem => User.Identity.Name)
+            </span>
+
+        </div>
+    </nav>
+    /////////////////////////
+    <div class="home-content">
+
+
+        <div class="sales-boxes">
+            <div class="recent-sales box">
+                <div class="sales-details" style="display:block">
+                    @using (Html.BeginForm("DownloadAll", "Ideas", FormMethod.Post))
+                    {
+                        <table class="table table-bordered table-condensed">
+                            <thead>
+                                <tr>
+                                    <th><input type="checkbox" onclick="toggle(this);" /> Select all<br /></th>
+                                    <th>File Name</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < Model.Count(); i++)
+                                {
+                                    <tr>
+                                        <td>@Html.CheckBoxFor(model => model[i].IsSelected)</td>
+                                        <td>
+                                            @Model[i].FileName
+                                            @Html.HiddenFor(model => model[i].FilePath)
+                                            @Html.HiddenFor(model => model[i].FileName)
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <br />
+                        
+                        <input type="submit" style="        padding: 5px 10px;
+        border-radius: 5px;
+        border: none;
+        background-color: rgb(39, 118, 180);
+        color: white;" value="Download All" />
+        <label style="font-size: 12px; font-weight: normal">*Download all file as Zip</label>
+
+    <script>
+        function toggle(source) {
+            var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            for (var i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i] != source)
+                    checkboxes[i].checked = source.checked;
+            }
+        }
+    </script>
+    }
+</div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</section>
